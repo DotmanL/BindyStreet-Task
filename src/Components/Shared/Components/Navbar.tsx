@@ -6,12 +6,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import BindyLogo from '../assets/bindylogo.png';
 import DarkModeToggle from './DarkModeToggle';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,10 +23,14 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'space-around',
+      padding: theme.spacing(1),
+    },
   },
   appBar: {
     background: theme.palette.background.default,
-    color: 'black',
+    color: theme.palette.text.primary,
     top: '0',
     // boxShadow: 'none',
     height: '90px',
@@ -32,13 +38,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
       height: '60px',
-      borderBottom: '2px solid white',
     },
   },
   new: {
     backgroundColor: theme.palette.background.default,
     top: '0',
-    color: 'black',
+    color: theme.palette.text.primary,
     height: '90px',
     padding: theme.spacing(0, 0),
     justifyContent: 'center',
@@ -64,25 +69,60 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    padding: theme.spacing(0),
     color: theme.palette.text.primary,
+    [theme.breakpoints.down('sm')]: {
+
+    },
   },
   userIntro: {
     width: '100%',
     color: theme.palette.text.primary,
-    marginRight: theme.spacing(2),
+    margin: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      margin: theme.spacing(1),
+
+    },
   },
   todosButton: {
     background: theme.palette.mainBackground.color,
     borderRadius: '8px',
     padding: theme.spacing(0.5, 1.5),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(0.2, 1),
+    },
+  },
+  todoText: {
+    color: theme.palette.text.primary,
+    fontSize: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.spacing(1.4),
+    },
+  },
+  dmContainer: {
+    padding: '0',
+
+  },
+  appDetails: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  appLogo: {
+    width: '80px',
+    height: '80px',
+    [theme.breakpoints.down('sm')]: {
+      width: '40px',
+      height: '40px',
+    },
   },
   appName: {
-    fontSize: theme.spacing(4.8),
-    fontFamily: 'Montserrat',
+    fontSize: theme.spacing(3.6),
+    fontFamily: 'Nunito',
     fontWeight: 900,
     color: theme.palette.text.primary,
     [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(2.4),
+      display: 'none',
     },
   },
   drawer: {
@@ -111,9 +151,10 @@ const useStyles = makeStyles((theme) => ({
 
 interface NavBarProps {
   appName: string;
+  onShowTodo: () => void;
 }
 
-export const NavBar: React.FC<NavBarProps> = ({ appName }) => {
+export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
   const classes = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [scrolledDownEnough, setScrolledDownEnough] = useState(false);
@@ -152,7 +193,10 @@ export const NavBar: React.FC<NavBarProps> = ({ appName }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.appName}>{appName}</Typography>
+          <Grid className={classes.appDetails}>
+            <img src={BindyLogo} className={classes.appLogo} alt="BindyStreet" />
+            <Typography variant="h6" className={classes.appName}>{appName}</Typography>
+          </Grid>
         </Grid>
         <Grid className={classes.navLinks}>
           <Grid>
@@ -160,12 +204,21 @@ export const NavBar: React.FC<NavBarProps> = ({ appName }) => {
           </Grid>
           <List>
             {' '}
-            <ListItem button className={classes.todosButton}>
-              <ListItemText primary="TODOS" />
-            </ListItem>
+            <Button className={classes.todosButton}>
+              <Typography
+                className={classes.todoText}
+                onClick={(): void => {
+                  onShowTodo();
+                }}
+              >
+                {' '}
+                TODOS
+              </Typography>
+            </Button>
           </List>
-
-          <DarkModeToggle />
+          <Grid className={classes.dmContainer}>
+            <DarkModeToggle />
+          </Grid>
         </Grid>
         <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
           <List className={classes.drawer}>

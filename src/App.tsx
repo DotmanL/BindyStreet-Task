@@ -1,16 +1,11 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ColorModeContext } from './Components/Shared/Components/ColorContext';
 import { getDesignTokens } from './Components/Shared/styles/theme';
 import Spinner from './Components/Shared/Components/Spinner';
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line no-unused-vars
-  interface DefaultTheme extends Theme {}
-}
 
 const HomePage = React.lazy(() => import('./Pages/Onboarding/HomePage'));
 
