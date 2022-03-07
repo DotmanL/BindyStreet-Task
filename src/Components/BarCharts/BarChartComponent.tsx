@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontFamily: 'Montserrat Alternates',
-    marginTop: theme.spacing(11),
+    marginTop: theme.spacing(5),
     color: theme.palette.common.white,
     background: theme.palette.mainBackground.color,
     border: '2px solid',
@@ -40,10 +40,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifySelf: 'center',
-    marginTop: theme.spacing(9),
+    marginTop: theme.spacing(2),
     padding: theme.spacing(1),
     [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing(2),
       padding: theme.spacing(0.5),
     },
   },
