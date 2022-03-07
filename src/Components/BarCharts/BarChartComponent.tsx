@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import {
   ResponsiveContainer, CartesianGrid, BarChart, Bar, XAxis, YAxis, Tooltip, Legend,
 } from 'recharts';
+import { useTheme } from '@mui/material';
 import { Posts } from '../Api/types';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontFamily: 'Montserrat Alternates',
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(11),
     color: theme.palette.common.white,
     background: theme.palette.mainBackground.color,
     border: '2px solid',
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.spacing(3.6),
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(2),
+      marginTop: theme.spacing(3),
     },
   },
   barChart: {
@@ -47,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   bars: {
     fill: theme.palette.text.primary,
+    background: 'red',
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(0),
       padding: theme.spacing(0),
@@ -62,6 +65,7 @@ interface BarChartComponentProps {
 
 export const BarChartComponent: React.FC<BarChartComponentProps> = ({ data, isLoading, error }) => {
   const classes = useStyles();
+  const theme = useTheme();
 
   if (isLoading) {
     return <p>Loading....</p>;
@@ -71,7 +75,7 @@ export const BarChartComponent: React.FC<BarChartComponentProps> = ({ data, isLo
   }
 
   // eslint-disable-next-line max-len
-  const newData = data && data.map((posts) => ({ name: `Title ${posts.id}`, id: posts.id, todoTitleLength: posts.title.length }));
+  const newData = data && data.map((posts) => ({ id: posts.id, todoTitleLength: posts.title.length }));
 
   return (
     <Grid container className={classes.root}>
@@ -95,7 +99,7 @@ export const BarChartComponent: React.FC<BarChartComponentProps> = ({ data, isLo
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="id" />
           <YAxis />
-          <Tooltip />
+          <Tooltip contentStyle={{ color: theme.palette.common.black }} />
           <Legend />
 
           <Bar dataKey="todoTitleLength" className={classes.bars} />

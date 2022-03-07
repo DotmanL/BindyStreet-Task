@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     [theme.breakpoints.down('sm')]: {
-      justifyContent: 'space-around',
-      padding: theme.spacing(1),
+      justifyContent: 'space-evenly',
+      padding: theme.spacing(0.5, 0, 0.5, 1.5),
     },
   },
   appBar: {
-    background: theme.palette.background.default,
-    color: theme.palette.text.primary,
+    background: theme.palette.mainBackground.color,
+    color: theme.palette.common.white,
     top: '0',
     // boxShadow: 'none',
     height: '90px',
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
       height: '60px',
     },
   },
-  new: {
+  newAppBar: {
     backgroundColor: theme.palette.background.default,
     top: '0',
     color: theme.palette.text.primary,
@@ -70,14 +70,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     padding: theme.spacing(0),
-    color: theme.palette.text.primary,
     [theme.breakpoints.down('sm')]: {
+      justifyContent: 'space-evenly',
 
     },
   },
   userIntro: {
     width: '100%',
-    color: theme.palette.text.primary,
     margin: theme.spacing(2),
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(1),
@@ -93,20 +92,22 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   todoText: {
-    color: theme.palette.text.primary,
+    color: theme.palette.common.white,
     fontSize: theme.spacing(2),
+    fontWeight: theme.typography.fontWeightMedium,
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(1.4),
     },
   },
   dmContainer: {
-    padding: '0',
-
+    [theme.breakpoints.down('sm')]: {
+    },
   },
   appDetails: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   appLogo: {
     width: '80px',
@@ -120,7 +121,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.spacing(3.6),
     fontFamily: 'Nunito',
     fontWeight: 900,
-    color: theme.palette.text.primary,
+    margin: theme.spacing(1.5, 0, 0, 1),
+    // color: theme.palette.text.primary,
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
@@ -165,7 +167,7 @@ export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
       const bodyScrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
       // eslint-disable-next-line no-shadow
-      const scrolledDown = bodyScrollTop > 120;
+      const scrolledDown = bodyScrollTop > 60;
       setScrolledDownEnough(scrolledDown);
     };
 
@@ -178,7 +180,7 @@ export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
     <AppBar
       position="fixed"
       className={classnames({
-        [classes.new]: scrolledDownEnough,
+        [classes.newAppBar]: scrolledDownEnough,
         [classes.appBar]: !scrolledDownEnough,
       })}
     >
@@ -204,7 +206,7 @@ export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
           </Grid>
           <List>
             {' '}
-            <Button className={classes.todosButton}>
+            <Button variant="contained" className={classes.todosButton}>
               <Typography
                 className={classes.todoText}
                 onClick={(): void => {
@@ -227,15 +229,18 @@ export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
             </ListItem>
 
             <ListItem button>
-              <ListItemText primary="About" />
+              <ListItemText primary="Browse" />
             </ListItem>
 
+            <ListItem button>
+              <ListItemText primary="Blogs" />
+            </ListItem>
+
+            <ListItem button>
+              <ListItemText primary="Business" />
+            </ListItem>
             <ListItem button>
               <ListItemText primary="Contact" />
-            </ListItem>
-
-            <ListItem button>
-              <ListItemText primary="Services" />
             </ListItem>
           </List>
         </Drawer>
