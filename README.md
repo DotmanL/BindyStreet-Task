@@ -20,7 +20,7 @@ This can be done by running `cd ..`
 
 ### (Final Step), run the project, this serves the .NetWeb Api and React App together
 ## `dotnet run`
-### This might take a while depending on computing power, some webpack deprecation warning will show up, ignore this. Once you can see the deprecation warning, the web app is alive and can be accessed on https://localhost:5001/ in your browser.
+### This might take a while depending on computing power, some webpack deprecation warning will show up, ignore this. Once you can see the deprecation warning, the react web is live and can be accessed on https://localhost:5001/ in your browser.
 
 ## Enjoy the views in both Light and Dark Mode.
 
