@@ -22,7 +22,8 @@ This can be done by running `cd ..`
 ## `dotnet run`
 ### This might take a while depending on computing power, some webpack deprecation warning will show up, ignore this. Once you can see the deprecation warning, the react web is live and can be accessed on https://localhost:5001/ in your browser.
 
-## Enjoy the views in both Light and Dark Mode.
+## Enjoy the views in both Light and Dark Mode, 
+## You can also view the demo static web app but with partial functionality as the .NetApi is not connected on the static demo site at https://bindystreet-task.netlify.app/
 
 Oladotun Lawal
 
