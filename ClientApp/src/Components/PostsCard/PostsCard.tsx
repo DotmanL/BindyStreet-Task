@@ -40,6 +40,16 @@ const useStyles = makeStyles((theme) => ({
       width: '95vw',
     },
   },
+  title: {
+    fontWeight: theme.typography.fontWeightMedium,
+  },
+  body: {
+    fontWeight: theme.typography.fontWeightRegular,
+    marginTop: theme.spacing(1),
+    [theme.breakpoints.down('sm')]: {
+      marginTo: theme.spacing(1),
+    },
+  },
 }));
 
 interface PostsCardProps {
@@ -78,10 +88,10 @@ export const PostsCard: React.FC<PostsCardProps> = ({ data, isLoading, error }) 
                 <Typography variant="h5">
                   {posts.id}
                 </Typography>
-                <Typography variant="h5">
+                <Typography variant="h5" className={classes.title}>
                   {posts.title}
                 </Typography>
-                <Typography sx={{ mt: 1.5 }} variant="h6">
+                <Typography className={classes.body} variant="h6">
                   {posts.body}
                 </Typography>
               </CardContent>

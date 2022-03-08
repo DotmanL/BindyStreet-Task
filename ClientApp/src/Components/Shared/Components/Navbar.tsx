@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'space-around',
       padding: theme.spacing(0),
