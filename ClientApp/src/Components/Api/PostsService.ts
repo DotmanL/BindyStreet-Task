@@ -7,7 +7,6 @@ const apiClient = axios.create({
 
 const findAll = async () => {
   const response = await apiClient.get<Posts[]>('');
-  // console.log(response.data);
 
   return response.data.slice(0, 30);
 };

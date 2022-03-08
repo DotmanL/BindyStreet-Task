@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
   card: {
     margin: theme.spacing(2),
     color: theme.palette.text.primary,
+    borderRadius: '10px',
+    background: theme.palette.background.default,
     width: '45%',
     padding: theme.spacing(0),
     [theme.breakpoints.down('sm')]: {
@@ -79,7 +81,7 @@ export const PostsCard: React.FC<PostsCardProps> = ({ data, isLoading, error }) 
                 <Typography variant="h5">
                   {posts.title}
                 </Typography>
-                <Typography variant="h6">
+                <Typography sx={{ mt: 1.5 }} variant="h6">
                   {posts.body}
                 </Typography>
               </CardContent>

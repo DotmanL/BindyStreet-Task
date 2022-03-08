@@ -7,7 +7,7 @@ import { ColorModeContext } from './Components/Shared/Components/ColorContext';
 import { getDesignTokens } from './Components/Shared/styles/theme';
 import Spinner from './Components/Shared/Components/Spinner';
 
-const HomePage = React.lazy(() => import('./Pages/Onboarding/HomePage'));
+const HomePage = React.lazy(() => import('./Pages/HomePage/HomePage'));
 
 const queryClient = new QueryClient();
 

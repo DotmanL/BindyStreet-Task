@@ -25,7 +25,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
       : {
         primary: deepOrange,
         mainBackground: {
-          color: '#ff8c00',
+          color: grey[900],
         },
         divider: grey[800],
         background: {

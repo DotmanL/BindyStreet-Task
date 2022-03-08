@@ -45,6 +45,7 @@ const HomePage: React.FC = () => {
         <title>Bindy Street Task</title>
       </Helmet>
       <NavBar
+        buttonTitle={!barGraph ? 'TODOS' : 'POSTS'}
         appName="BINDY STREET TASK"
         onShowTodo={(): void => showBarGraps()}
       />

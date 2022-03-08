@@ -13,6 +13,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { useQuery } from 'react-query';
+import Skeleton from '@mui/material/Skeleton';
+import { UsersApi } from '../../Api/UserService';
+import { Users } from '../../Api/types';
 import BindyLogo from '../assets/bindylogo.png';
 import DarkModeToggle from './DarkModeToggle';
 
@@ -23,16 +27,18 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    padding: theme.spacing(2),
     [theme.breakpoints.down('sm')]: {
-      justifyContent: 'space-evenly',
-      padding: theme.spacing(0.5, 0, 0.5, 1.5),
+      justifyContent: 'space-around',
+      padding: theme.spacing(0),
+
     },
   },
   appBar: {
-    background: theme.palette.mainBackground.color,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.background.default,
     top: '0',
-    // boxShadow: 'none',
+    color: theme.palette.text.primary,
+    boxShadow: 'none',
     height: '90px',
     padding: theme.spacing(0, 0),
     justifyContent: 'center',
@@ -64,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   navLinks: {
     display: 'flex',
@@ -77,9 +84,13 @@ const useStyles = makeStyles((theme) => ({
   },
   userIntro: {
     width: '100%',
-    margin: theme.spacing(2),
+    fontSize: theme.spacing(2.4),
+    marginRight: theme.spacing(2),
+    marginTop: theme.spacing(0.5),
     [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      marginTop: theme.spacing(0.3),
+      fontSize: theme.spacing(1.8),
 
     },
   },
@@ -153,13 +164,15 @@ const useStyles = makeStyles((theme) => ({
 
 interface NavBarProps {
   appName: string;
+  buttonTitle: string;
   onShowTodo: () => void;
 }
 
-export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
+export const NavBar: React.FC<NavBarProps> = ({ appName, buttonTitle, onShowTodo }) => {
   const classes = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [scrolledDownEnough, setScrolledDownEnough] = useState(false);
+  const { isLoading, error, data } = useQuery<Users[], Error>('getUser', async () => UsersApi.loadUser());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -175,6 +188,14 @@ export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolledDownEnough]);
+
+  if (error) {
+    return (
+      <p>
+        {(error as Error)?.message}
+      </p>
+    );
+  }
 
   return (
     <AppBar
@@ -202,10 +223,23 @@ export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
         </Grid>
         <Grid className={classes.navLinks}>
           <Grid>
-            <Typography variant="h6" className={classes.userIntro}>Hi, Dotun</Typography>
+            {isLoading ? (
+              <Grid sx={{ marginRight: '60px' }}>
+                <Typography variant="h6" className={classes.userIntro}>
+                  <Skeleton sx={{ width: '100%' }} animation="wave" />
+                </Typography>
+              </Grid>
+            ) : (
+              <Grid>
+                {data && data?.map((users: Users) => (
+                  <Typography key={users.id} variant="h6" className={classes.userIntro}>
+                    {`Hi, ${users.username}`}
+                  </Typography>
+                ))}
+              </Grid>
+            )}
           </Grid>
           <List>
-            {' '}
             <Button variant="contained" className={classes.todosButton}>
               <Typography
                 className={classes.todoText}
@@ -213,8 +247,7 @@ export const NavBar: React.FC<NavBarProps> = ({ appName, onShowTodo }) => {
                   onShowTodo();
                 }}
               >
-                {' '}
-                TODOS
+                {buttonTitle}
               </Typography>
             </Button>
           </List>
