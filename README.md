@@ -12,7 +12,7 @@ Cd into the ClientApp directory, using `cd ClientApp`
 ## `npm install`
 While in the ClientApp directory, run `npm install` and wait for all dependencies to be installed.
 
-# Switch back to the base directory ('BindyStreet)
+# Switch back to the base directory ('BindyStreet-Task`)
 This can be done by running `cd ..`
 
 ###  (Optional Step) Build the project without debugging
