@@ -1,5 +1,5 @@
 # BindyStreet-Task
-BindyStreet Take Home Interview -- This web application was created with create-react-app typsecript template and .Net Web Api was also integrated into this application,
+BindyStreet Take Home Interview -- This web application was created with create-react-app typsecript template and a .Net Web Api was also integrated into this application,
 
 ## Usage Instruction for running this repo locally
 
