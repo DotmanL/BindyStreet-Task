@@ -5,7 +5,7 @@ BindyStreet Take Home Interview -- This web application was created with create-
 
 ### Clone this repository
 ## `git clone https://github.com/DotmanL/BindyStreet-Task.git`
-Git Clone this repository by running `git clone https://github.com/DotmanL/BindyStreet-Task.git` into your desired directory.
+Clone this repository by running `git clone https://github.com/DotmanL/BindyStreet-Task.git` into your desired directory.
 cd into the cloned folder `cd BindyStreet-task` then cd into the ClientApp directory, using `cd ClientApp`
 
 ### Install all dependencies 
@@ -27,7 +27,6 @@ This can be done by running `cd ..`
 
 Oladotun Lawal
 
-🙂
 
 
 
